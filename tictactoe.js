@@ -7,6 +7,7 @@ const inquirer = require('inquirer');
 // use minimist and inquirer to get input from the command line
 
 // build basic board structure
+
 const board = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']];
 
 let player1Turn = true;
@@ -18,6 +19,11 @@ if (player1Turn === true) {
   player = 'player2';
 }
 
+const playerMoves = {
+  'player1': 'x',
+  'player2': 'o'
+}
+
 const printBoard = () => {
   console.log(`${board[0][0]} | ${board[0][1]} | ${board[0][2]}`);
   console.log('---------');
@@ -27,8 +33,10 @@ const printBoard = () => {
   console.log(`${player}, it is your turn`);
 };
 
+let gameOn = true;
 printBoard();
 
+player1Turn = false;
 inquirer
   .prompt([
     {
@@ -50,8 +58,14 @@ inquirer
     },
   ])
   .then(answers => {
-    console.log(JSON.stringify(answers));
+    console.log(answers.move);
+    if (answers.move === 'Top Left') {
+      board[0][0] = playerMoves[player];
+    }
+    printBoard();
   });
+
+
 
 
 
