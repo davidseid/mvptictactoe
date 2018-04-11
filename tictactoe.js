@@ -1,3 +1,9 @@
+const inquirer = require('inquirer');
+
+
+// inquirer.prompt([/* Pass your questions in here */]).then(answers => {
+//   // Use user feedback for... whatever!!
+// });
 // use minimist and inquirer to get input from the command line
 
 // build basic board structure
@@ -23,7 +29,29 @@ const printBoard = () => {
 
 printBoard();
 
-
+inquirer
+  .prompt([
+    {
+      type: 'list',
+      name: 'move',
+      message: 'Where do you want to move? ',
+      choices: [
+        'Top Left',
+        'Top Middle',
+        // new inquirer.Separator(),
+        'Top Right',
+        'Mid Left',
+        'Mid Mid',
+        'Mid Right',
+        'Bottom Left',
+        'Bottom Mid', 
+        'Bottom Right'
+      ]
+    },
+  ])
+  .then(answers => {
+    console.log(JSON.stringify(answers));
+  });
 
 
 
